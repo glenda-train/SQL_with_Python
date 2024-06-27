@@ -1,0 +1,16 @@
+# Based on: https://gist.github.com/Da9el00/4e33eee28d9a1f153674bed34899ea82
+services:
+  pythonapp:
+    build: ./python/
+    command: sh -c "sleep 20s; python3 ./insert_data.py"
+    depends_on:
+      - mysql
+
+  mysql:
+    build: ./mysql/
+    restart: always
+    environment:
+      MYSQL_DATABASE: 'sqlproject'
+      MYSQL_ROOT_PASSWORD: 'apasswordhere'
+    ports:
+      - '3306:3306'
